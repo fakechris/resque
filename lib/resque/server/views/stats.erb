@@ -51,7 +51,7 @@
       <th>
         <a href="/stats/keys/<%= key %>"><%= key %></a>
       </th>
-      <td><%= resque.redis.type key %></td>
+      <td><%= redis_get_type key %></td>
       <td><%= redis_get_size key %></td>
     </tr>
   <% end %>

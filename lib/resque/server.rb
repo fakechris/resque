@@ -41,8 +41,12 @@ module Resque
         "<li #{class_if_current(dname)}><a href='#{url dname}'>#{name}</a></li>"
       end
 
+      def redis_get_type(key)
+        Resque.redis.type("resque:" + key) 
+      end
+
       def redis_get_size(key)
-        case Resque.redis.type(key)
+        case Resque.redis.type("resque:" + key)
         when 'none'
           []
         when 'list'
@@ -55,7 +59,7 @@ module Resque
       end
 
       def redis_get_value_as_array(key)
-        case Resque.redis.type(key)
+        case Resque.redis.type("resque:" + key)
         when 'none'
           []
         when 'list'
